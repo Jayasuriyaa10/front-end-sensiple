@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Thank You</title>
+    
+    <style>
+        /* Set the background image and other styling */
+        body {
+            background: url('assets/images/movie-collage.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .thankyou-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .thankyou-container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .thankyou-container p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .thankyou-container button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .thankyou-container button:hover {
+            background-color: #2ecc71;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="thankyou-container">
+        <h1>Thank You for Your Purchase!</h1>
+        <p>Your order has been successfully processed. We hope you enjoy your movie experience!</p>
+        <button onclick="window.location.href='index.html'">Return to Home</button>
+    </div>
+
+</body>
+</html>

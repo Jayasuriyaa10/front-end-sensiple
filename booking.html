@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ticket</title>
+    <style>
+        body {
+            background: url('assets/images/movie-collage.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            z-index: -1; /* Place overlay behind content */
+        }
+
+        .booking-container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 20px;
+        }
+
+        h2 {
+            color: rgb(255, 255, 255);
+            font-family: 'Cursive', sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .show-timing {
+            margin: 20px 0;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+        select, input {
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .total {
+            margin-top: 20px;
+        }
+
+        .total span {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2ecc71;
+        }
+
+        .movie-info {
+            margin: 20px 0;
+        }
+
+        .movie-info img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Logout Button Styles */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logout Button -->
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+    <div class="overlay"></div>
+
+    <header>
+    </header>
+
+    <div class="booking-container">
+        <h2>Book Your Tickets</h2>
+
+        <!-- Display selected movie information -->
+        <div class="movie-info">
+            <img id="movie-image" src="" alt="Movie Image">
+            <h3 id="movie-title"></h3>
+        </div>
+
+        <!-- Show timings dropdown -->
+        <div class="show-timing">
+            <label for="show-time">Select Show Timing:</label>
+            <select id="show-time">
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="7:00 PM">7:00 PM</option>
+            </select>
+        </div>
+
+        <!-- Number of tickets selection -->
+        <div class="ticket-selection">
+            <label for="ticket-count">How many tickets?</label>
+            <input type="number" id="ticket-count" value="1" min="1" max="10">
+        </div>
+
+        <!-- Display total price -->
+        <div class="total">
+            <span>Total Tickets: <span id="total-tickets">1</span></span>
+            <span>Total Price: $<span id="total-price">120</span></span>
+            <br><br>
+            <button id="proceed-to-payment">Proceed to Payment</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle logout
+        function logout() {
+            // Clear session data or any storage data if necessary (like cookies or localStorage)
+            localStorage.clear(); // If you're using localStorage
+            sessionStorage.clear(); // If you're using sessionStorage
+
+            // Redirect to the login or homepage
+            window.location.href = 'index.html'; // Adjust as needed
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve movie details from localStorage
+            const movieTitle = localStorage.getItem('movieTitle');
+            const movieImage = localStorage.getItem('movieImage');
+
+            // Display movie title and image
+            document.getElementById('movie-title').textContent = movieTitle;
+            document.getElementById('movie-image').src = movieImage;
+
+            // Set the ticket price
+            const ticketPrice = 120; // Price per ticket
+            const ticketCountInput = document.getElementById('ticket-count');
+            const totalTickets = document.getElementById('total-tickets');
+            const totalPrice = document.getElementById('total-price');
+            const proceedToPaymentButton = document.getElementById('proceed-to-payment');
+
+            // Function to update total count and price
+            function updateTotal(count) {
+                totalTickets.textContent = count;
+                const price = (count * ticketPrice).toFixed(2);
+                totalPrice.textContent = price;
+            }
+
+            // Update total ticket count and price dynamically
+            ticketCountInput.addEventListener('input', function() {
+                let count = parseInt(ticketCountInput.value);
+                if (isNaN(count) || count < 1) {
+                    count = 1; // Set to 1 if input is invalid
+                    ticketCountInput.value = 1;
+                }
+                updateTotal(count);
+            });
+
+            // Proceed to payment
+            proceedToPaymentButton.addEventListener('click', function() {
+                const count = parseInt(ticketCountInput.value);
+                if (count < 1) {
+                    alert('Please select at least one ticket.');
+                } else {
+                    const showTime = document.getElementById('show-time').value;
+                    localStorage.setItem('showTime', showTime);
+                    localStorage.setItem('ticketCount', count);
+                    alert(`Proceeding to payment for ${count} tickets. Total: $${count * ticketPrice}`);
+                    window.location.href = "payment.html"; // Redirect to payment page
+                }
+            });
+
+            // Default ticket count update on page load
+            let initialCount = parseInt(ticketCountInput.value);
+            if (isNaN(initialCount) || initialCount < 1) {
+                initialCount = 1;
+                ticketCountInput.value = 1;
+            }
+            updateTotal(initialCount);
+        });
+    </script>
+
+</body>
+</html>

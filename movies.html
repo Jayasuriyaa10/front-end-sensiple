@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search</title>
+    <!-- Link to Google Fonts for a better font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Apply the background image to the header */
+        header {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-image: url('your-image-url.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 200px; /* Adjust height as needed */
+            color: white;
+        }
+
+        /* Position the logout button on top of the background image */
+        #logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: rgba(244, 67, 54, 0.8); /* Semi-transparent red background */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 2; /* Ensure button is on top of background */
+        }
+
+        #logout-btn:hover {
+            background-color: rgba(211, 47, 47, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">BookMyShow</div>
+        <input type="text" id="search-movie" placeholder="Search for movies...">
+        <!-- Logout Button -->
+        <button id="logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <div id="movie-list" class="movie-list">
+    </div>
+
+    <script>
+        function logout() {
+            // Redirect to index.html when the logout button is clicked
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

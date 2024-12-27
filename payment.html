@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing & Payment</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            border: none;
+            text-transform: capitalize;
+            transition: all 0.2s linear;
+        }
+
+        /* Set the background image */
+        body {
+            background: url('assets/images/movie-collage.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 25px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .container form {
+            padding: 20px;
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.8); /* White background with transparency */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .container form .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .container form .row .col {
+            flex: 1 1 250px;
+            padding: 10px;
+        }
+
+        .container form .row .col .title {
+            font-size: 20px;
+            color: #333;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .container form .row .col .inputBox {
+            margin: 15px 0;
+        }
+
+        .container form .row .col .inputBox span {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .container form .row .col .inputBox input {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            font-size: 15px;
+        }
+
+        .container form .row .col .inputBox input:focus {
+            border: 1px solid #000;
+        }
+
+        .container form .row .col .flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .container form .row .col .inputBox img {
+            height: 34px;
+            margin-top: 5px;
+            filter: drop-shadow(0 0 1px #000);
+        }
+
+        .container form .submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            background: #27ae60;
+            color: #fff;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        .container form .submit-btn:hover {
+            background: #2ecc71;
+        }
+
+        /* Ticket display section */
+        .ticket {
+            display: none;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin-top: 30px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .ticket img {
+            width: 150px;
+        }
+
+        .ticket h3 {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .barcode {
+            margin-top: 20px;
+            font-size: 24px;
+            font-family: 'Courier', sans-serif;
+        }
+
+        /* Confirm and Cancel buttons */
+        .ticket .buttons {
+            margin-top: 20px;
+        }
+
+        .ticket .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .ticket .buttons .confirm {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .ticket .buttons .confirm:hover {
+            background-color: #2ecc71;
+        }
+
+        .ticket .buttons .cancel {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .ticket .buttons .cancel:hover {
+            background-color: #c0392b;
+        }
+
+        /* Logout button styles */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Logout Button -->
+<button class="logout-btn" onclick="logout()">Logout</button>
+
+<div class="container">
+    <form action="thankyou.html" method="get" >
+
+    <form id="payment-form">
+        <div class="row">
+            <div class="col">
+                <h3 class="title">Billing Address</h3>
+                <div class="inputBox">
+                    <span>Full Name:</span>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="inputBox">
+                    <span>Email:</span>
+                    <input type="email" id="email" placeholder="enter your e-mail id" required>
+                </div>
+                <div class="inputBox">
+                    <span>Address:</span>
+                    <input type="text" id="address" placeholder="Room - Street - Locality" required>
+                </div>
+                <div class="inputBox">
+                    <span>City:</span>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>State:</span>
+                        <input type="text" id="state" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>Zip Code:</span>
+                        <input type="text" id="zip" placeholder="123 456" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <h3 class="title"></h3>
+                <!-- Movie Details Inputs -->
+
+                <div class="inputBox">
+                    <span>Cards Accepted:</span>
+                    <img src="assets/images/card_img.jpg" alt="Accepted Cards">
+                </div>
+                <div class="inputBox">
+                    <span>Name on Card:</span>
+                    <input type="text" id="card-name" required>
+                </div>
+                <div class="inputBox">
+                    <span>Credit Card Number:</span>
+                    <input type="text" id="card-number" placeholder="1111-2222-3333-4444" required>
+                </div>
+                <div class="inputBox">
+                    <span>Exp Month:</span>
+                    <input type="text" id="exp-month" placeholder="January" required>
+                </div>
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>Exp Year:</span>
+                        <input type="number" id="exp-year" placeholder="2022" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>CVV:</span>
+                        <input type="text" id="cvv" placeholder="123" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" value="Proceed to Checkout" class="submit-btn">
+    </form>
+</div>
+
+<!-- Ticket Display Section -->
+<div class="ticket" id="ticket">
+    <h2>Your Ticket</h2>
+    <img id="ticket-movie-image" src="" alt="Movie Image">
+    <h3 id="ticket-name"></h3>
+    <p>Show Time: <span id="ticket-showtime"></span></p>
+    <p>Tickets: <span id="ticket-count-display"></span></p>
+    <div class="barcode">
+        <p></p>
+        <img id="barcode" src="" alt="Barcode">
+    </div>
+
+    <!-- Confirm and Cancel Buttons -->
+    <div class="buttons">
+        <button class="confirm" id="confirm-ticket">Confirm Ticket</button>
+        <button class="cancel" id="cancel-ticket">Cancel Ticket</button>
+    </div>
+</div>
+
+<script>
+    // Function to handle logout
+    function logout() {
+        // Clear session data or any storage data if necessary (like cookies or localStorage)
+        localStorage.clear(); // If you're using localStorage
+        sessionStorage.clear(); // If you're using sessionStorage
+
+        // Redirect to the login or homepage
+        window.location.href = 'index.html'; // Adjust as needed
+    }
+
+    // Wait for the DOM to load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve movie details from localStorage
+        const movieTitle = localStorage.getItem('movieTitle');
+        const movieImage = localStorage.getItem('movieImage');
+        const showTime = localStorage.getItem('showTime');
+        const ticketCount = localStorage.getItem('ticketCount');
+
+        // Populate the ticket details dynamically
+        document.getElementById('ticket-name').textContent = movieTitle;
+        document.getElementById('ticket-movie-image').src = movieImage;
+        document.getElementById('ticket-showtime').textContent = showTime;
+        document.getElementById('ticket-count-display').textContent = ticketCount;
+        document.getElementById('barcode').src = "assets/images/barcode.jpg"; // Placeholder for barcode
+
+        // Show the ticket div
+        document.getElementById('ticket').style.display = 'block';
+
+        // Confirm ticket action
+        document.getElementById('confirm-ticket').addEventListener('click', function() {
+            window.location.href = 'thankyou.html'; // Redirect to thank you page
+        });
+
+        // Cancel ticket action
+        document.getElementById('cancel-ticket').addEventListener('click', function() {
+            window.location.href = 'index.html'; // Redirect to homepage
+        });
+
+        // Get all elements with class 'barcode'
+        document.querySelector('.submit-btn').addEventListener('click', function() {
+            window.location.href = 'thankyou.html'; // Redirect to thank you page
+        });
+    });
+</script>
+
+</body>
+</html>

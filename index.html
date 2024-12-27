@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookMyShow - Login / Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('assets/images/movie-collage.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Button Container */
+        .button-container {
+            text-align: center;
+        }
+
+        .button-container button {
+            background-color: #ffcc00;
+            border: none;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #ff9900;
+        }
+
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .form-container h2 {
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+
+        .form-container label {
+            font-size: 14px;
+            margin: 6px 0;
+            display: block;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 6px;
+            margin: 8px 0;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #ffcc00;
+            border: none;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #ff9900;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Button Container for Sign In and Login -->
+    <div class="button-container" id="buttonContainer">
+        <button id="signInBtn" onclick="showSignIn()">Sign Up</button>
+        <button id="loginBtn" onclick="showLogin()">Sign In</button>
+    </div>
+
+    <!-- Sign In Form -->
+    <div class="form-container" id="signInForm">
+        <h2>Create an Account</h2>
+        <form id="signUpForm">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" required placeholder="First name">
+
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" required placeholder="Last name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Email">
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" required placeholder="10-digit mobile" pattern="[0-9]{10}" title="Enter a valid 10-digit mobile number">
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required placeholder="Location">
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required placeholder="Username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Password">
+
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-container" id="loginForm">
+        <h2>Login</h2>
+        <form id="loginFormSubmit">
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" name="login-username" required placeholder="Username">
+
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="login-password" required placeholder="Password">
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to handle the transitions between forms
+
+        // Initially hide forms
+        document.getElementById('signInForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'none';
+
+        // Show Sign In form
+        function showSignIn() {
+            document.getElementById('buttonContainer').style.display = 'none'; // Hide buttons
+            document.getElementById('signInForm').style.display = 'block'; // Show Sign In form
+        }
+
+        // Show Login form
+        function showLogin() {
+            document.getElementById('buttonContainer').style.display = 'none'; // Hide buttons
+            document.getElementById('loginForm').style.display = 'block'; // Show Login form
+        }
+
+        // Handle sign up
+        document.getElementById('signUpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Store new username and password in localStorage
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+
+            alert('Account created successfully. Please log in.');
+
+            // Switch to login form after successful sign-up
+            document.getElementById('signInForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        });
+
+        // Handle login
+        document.getElementById('loginFormSubmit').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const enteredUsername = document.getElementById('login-username').value;
+            const enteredPassword = document.getElementById('login-password').value;
+
+            // Hardcoded credentials for initial login
+            const hardcodedUsername = 'jayasuriyaa10@gmail.com';
+            const hardcodedPassword = '123';
+
+            // Check if the entered username and password match
+            if ((enteredUsername === hardcodedUsername && enteredPassword === hardcodedPassword) ||
+                (enteredUsername === localStorage.getItem('username') && enteredPassword === localStorage.getItem('password'))) {
+                
+                // If credentials are valid, redirect to movies page
+                window.location.href = 'movies.html'; // Change this to your desired redirect page
+            } else {
+                alert('Invalid login credentials. Please try again.');
+            }
+        });
+    </script>
+
+</body>
+</html>
