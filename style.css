@@ -1,0 +1,188 @@
+/* Global styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed; 
+    background-size: cover;
+    color: #fff;
+}
+
+/* Header Style */
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* Logo style */
+header .logo {
+    font-size: 36px;
+    font-weight: 600;
+    color: #cd087b; /* BookMyShow orange color */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Search input style */
+#search-movie {
+    padding: 12px;
+    width: 280px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    color: #333;
+}
+
+#search-movie:focus {
+    border: 2px solid #ff6f00;
+}
+
+/* Movie list styling */
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual movie card styling */
+.movie-card {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for cards */
+    border-radius: 8px;
+    width: 220px;
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Movie image style */
+.movie-card img {
+    width: 100%;
+    border-radius: 5px;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* Movie title style */
+.movie-card h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #fff;
+}
+
+/* Button styling */
+.movie-card button {
+    background-color: #bc2171;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.movie-card button:hover {
+    background-color: #191819;
+}
+
+/* Total Price Section */
+.total {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #000;  /* Make total price text black */
+}
+
+/* Ticket Selection */
+.ticket-selection {
+    margin-bottom: 20px;
+    color: #000;
+}
+
+/* Input for ticket count */
+.ticket-selection input {
+    padding: 10px;
+    width: 50px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #070707;
+    border-radius: 5px;
+}
+
+/* Total Price Section for booking */
+.total {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #000;  /* Make the price section black */
+}
+
+/* Button */
+button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    .movie-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-card {
+        width: 85%;
+    }
+
+    #search-movie {
+        width: 80%;
+    }
+
+
+
+/* General body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 24px;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+}
